@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fashion_hub/screens/Category%20Page/categoryPage.dart';
+import 'package:fashion_hub/screens/productPage.dart';
 import 'package:fashion_hub/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,8 +18,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   TextEditingController controller = TextEditingController();
-  List matchList = [];
-  List products = [];
+  List<Widget> matchList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,11 @@ class _SearchPageState extends State<SearchPage> {
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         Widget ui;
         if (snapshot.hasData) {
+          List products = [];
           snapshot.data!.docs.forEach((element) {
-            products.add(element.id);
+            products.add(element.get('Name'));
           });
+          print(products.length);
           ui = ListView(children: [
             SizedBox(
               height: 20,
@@ -58,7 +60,45 @@ class _SearchPageState extends State<SearchPage> {
                       padding:
                           EdgeInsets.symmetric(vertical: 6.0, horizontal: 20),
                       child: TextFormField(
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          int j = -1;
+                          List<Widget> temp = [];
+                          for (String i in products) {
+                            j++;
+                            print(j);
+                            if (value.isEmpty) {
+                              setState(() {
+                                matchList = [];
+                              });
+                            }
+                            if (value ==
+                                i.substring(0, value.length).toLowerCase()) {
+                              String id = snapshot.data!.docs[j].id;
+                              temp.add(Padding(
+                                padding: EdgeInsets.all(4.0),
+                                child: ListTile(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return ProductPage(id: id);
+                                    }));
+                                  },
+                                  leading: Image.network(
+                                    snapshot.data!.docs[j].get('image'),
+                                    cacheHeight: (SizeConfig.height(context) *
+                                            0.45 *
+                                            0.6)
+                                        .round(),
+                                  ),
+                                  title: Text(i),
+                                ),
+                              ));
+                              setState(() {
+                                matchList = temp;
+                              });
+                            }
+                          }
+                        },
                         controller: controller,
                         style: GoogleFonts.roboto(
                             fontSize: 16, fontWeight: FontWeight.w500),
@@ -151,9 +191,11 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   )
                 : Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.red,
+                    height: SizeConfig.height(context) * 0.78,
+                    width: SizeConfig.width(context),
+                    child: ListView(
+                      children: matchList,
+                    ),
                   ),
           ]);
           return ui;

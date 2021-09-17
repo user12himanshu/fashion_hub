@@ -89,7 +89,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(height: 10),
                       HomeHeaderBanner(
                         onpressed: () {
-                          print("Buy Now Pressed");
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return ProductPage(id: 'dress15');
+                          }));
                         },
                       ),
                       Padding(
