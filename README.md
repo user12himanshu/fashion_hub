@@ -1,16 +1,14 @@
-# fashion_hub
+# Fashion Hub
 
 An e-commerce project
 
-## Getting Started
+## Description
+A flutter ecommerce application that allows users to buy fashion products. It has been made with flutter as it provides Fast Development, Expressive and Flexible UI and Native Performance in developing cross platform apps.
 
-This project is a starting point for a Flutter application.
+Application uses Firebase to store data.
 
-A few resources to get you started if this is your first Flutter project:
+Developing this application helped me in learning the concepts of Asynchronous Programming, Fetching And Displaying Data from API, Object Oriented Programming with Dart, Concepts of Firebase and creating beautiful Ui.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Highlights:
+  * Beautiful and Clean UI.
+  * Fast and Efficient
