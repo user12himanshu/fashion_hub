@@ -9,6 +9,6 @@ Application uses Firebase to store data.
 
 Developing this application helped me in learning the concepts of Asynchronous Programming, Fetching And Displaying Data from API, Object Oriented Programming with Dart, Concepts of Firebase and creating beautiful Ui.
 
-## Higlights:
+## Highlights:
   * Beautiful and Clean UI.
   * Fast and Efficient
