@@ -161,7 +161,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               tag: 'beauty',
                               child: CategoryTile(
                                 text: "Beauty",
-                                onpressed: () {},
+                                onpressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return CategoryPage(
+                                      heading: "Beauty",
+                                      category: "beauty",
+                                    );
+                                  }));
+                                },
                                 image: "assets/images/beautyCategory.jpg",
                               ),
                             ),
